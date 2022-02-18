@@ -40,7 +40,7 @@
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1" style="border: 1px solid #DFE0E0;
             box-sizing: border-box;
             border-radius: 10px;">
-              <form>
+              <form method="POST">{% csrf_token %}
                   <div class="pt-5">
                       <p style="font-family: SF Pro Display;
                       font-style: normal;
@@ -54,15 +54,15 @@
                       color: #212529;
                       ">Login Into Your Account</p>
                   </div>
-                <!-- Email input -->
+                <!-- Username input -->
                 <div class="form-outline pt-4 mb-4">
-                  <input type="email" id="form1Example13" class="form-control form-control-lg" />
-                  <label class="form-label" for="form1Example13">Email address</label>
+                  <input type="username" id="form1Example13"  name="username" class="form-control form-control-lg" />
+                  <label class="form-label" for="form1Example13">UserName</label>
                 </div>
       
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                  <input type="password" id="form1Example23" class="form-control form-control-lg" />
+                  <input type="password" id="form1Example23" name="password" class="form-control form-control-lg" />
                   <label class="form-label" for="form1Example23">Password</label>
                 </div>
       
