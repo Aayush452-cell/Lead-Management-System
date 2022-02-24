@@ -11,6 +11,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     phone_no = models.IntegerField(unique=True, default=9999999999)
+    manager_id = models.ForeignKey("self", on_delete=models.CASCADE, null=True)
+    status = models.CharField(max_length=20, default="Not Approved")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
