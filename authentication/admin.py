@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib import messages
 from django.utils.translation import ngettext
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser
+from .models import CustomUser, Leads
 
 # class BaseReadOnlyAdminMixin:
 #     def has_add_permission(self, request):
@@ -41,20 +41,24 @@ class CustomUserAdmin(UserAdmin):
 
     list_display = ('email', 'is_staff', 'is_active', 'is_superuser', 'status')
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'first_name', 'last_name', 'phone_no','manager_id')}),
+        (None, {'fields': ('email', 'password', 'first_name', 'last_name', 'phone_no', 'manager_id', 'status')}),
         ('Permissions', {'fields': ('is_staff', 'is_active', 'is_superuser', 'groups')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
             'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active', 'is_superuser', 'first_name',
-                       'last_name', 'phone_no', 'manager_id')}
+                       'last_name', 'phone_no', 'manager_id', 'status')}
          ),
     )
     search_fields = ('email',)
     ordering = ('email',)
     actions = [mark_approved, mark_not_approved]
 
+class LeadsAdmin(admin.ModelAdmin):
+    list_display = ('email', 'status', 'sales_representative')
+    list_filter = ('status', 'sales_representative', )
 
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(Leads, LeadsAdmin)
 admin.site.site_header = "Leads Management Platform"
