@@ -16,7 +16,7 @@ def user_login(request):
         except:
             return HttpResponse("Something went wrong")
     else:
-        return render(request, 'login.html')
+        return render(request, 'User_list_page.html')
 
 
 def user_register(request):
