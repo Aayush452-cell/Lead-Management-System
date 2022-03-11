@@ -23,14 +23,14 @@
                 alt=""
         />
     </a>
-    <button type="button" class="btn btn-outline-danger btn-lg" style="margin-left: auto;margin-right: 10px">LogOut
-    </button>
+    <a href="{% url 'logout' %}" style="margin-left: auto;margin-right: 10px"><button type="button" class="btn btn-outline-danger btn-lg" style="margin-left: auto;margin-right: 10px">LogOut
+    </button></a>
 </nav>
 <div class="container">
     <!-- Image and text -->
 <nav class="navbar navbar-light bg-light">
     <div style="margin-right: auto"  style="font-weight: bold;font-size: medium">
-        <img src="https://bootdey.com/img/Content/avatar/avatar8.png"  width="60" height="60" class="d-inline-block" alt=""> <strong style="font-size: medium">Good Morning Jane Cooper</strong><br>Below you will find the list of assigned leads to you
+        <img src="https://bootdey.com/img/Content/avatar/avatar7.png"  width="60" height="60" class="d-inline-block" alt=""> <strong style="font-size: medium">Good Morning {{ user.first_name }}</strong><br>Below you will find the list of assigned leads to you
     </div>
 </nav>
     <nav class="navbar sticky" style="background: rgba(255, 255, 255, 1); border: 1px solid #EBF0F5;
@@ -39,11 +39,11 @@ border-radius: 10px;
 ">
         <p style="font-size: medium">Filter Leads By Status</p>
         <div style="margin-left: auto;">
-            <button type="button" class="btn btn-outline-dark btn-lg">New Lead</button>
-            <button type="button" class="btn btn-outline-dark btn-lg">Hot Lead</button>
-            <button type="button" class="btn btn-outline-dark btn-lg">Med Lead</button>
-            <button type="button" class="btn btn-outline-dark btn-lg">Grey Lead</button>
-            <button type="button" class="btn btn-outline-dark btn-lg">Success</button>
+            <a href="{% url 'filtering' pk='cold' %}"><button type="button" class="btn btn-outline-dark btn-lg">New Lead</button></a>
+            <a href="{% url 'filtering' pk='hot' %}"><button type="button" class="btn btn-outline-dark btn-lg">Hot Lead</button></a>
+            <a href="{% url 'filtering' pk='cold' %}"><button type="button" class="btn btn-outline-dark btn-lg">Cold Lead</button></a>
+            <a href="{% url 'filtering' pk='med' %}"><button type="button" class="btn btn-outline-dark btn-lg">Med Lead</button></a>
+            <a href="{% url 'filtering' pk='sold' %}"><button type="button" class="btn btn-outline-dark btn-lg">Success</button></a>
         </div>
     </nav>
     <div class="row" style="border: 1px solid #EBF0F5;
@@ -65,156 +65,42 @@ border-radius: 10px;">
                         </tr>
                         </thead>
                         <tbody>
+                        {% for lead in leads %}
                         <tr style="font-size: medium">
                             <td>
                                 <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" style="border-radius: 50%;">
                             </td>
                             <td>
-                                <p>Mila Kunis</p>
+                                <p>{{ lead.name }}</p>
                             </td>
                             <td>
-                                <a href="#">mila@kunis.com</a>
+                                <a href="#">{{ lead.email }}</a>
                             </td>
                             <td>
-                                <p>+91-8245787848</p>
+                                <p>{{ lead.phone_no }}</p>
                             </td>
                             <td>
-                                <p>Hero@gmail.com</p>
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                  <button type="button" class="btn btn-outline-primary dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    New Lead
-                                  </button>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">New Lead</a>
-                                    <a class="dropdown-item" href="#">Hot Lead</a>
-                                    <a class="dropdown-item" href="#">Mark Down</a>
-                                  </div>
-                                </div>
-                            </td>
-                            <td>
-                                <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  +Add
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Add Remark:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit Changes</button>
-      </div>
-    </div>
-    </div>
-  </div>
-</div>
-                            </td>
-                        </tr>
-                <tr style="font-size: medium">
-                            <td>
-                                <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" style="border-radius: 50%;">
-                            </td>
-                            <td>
-                                <p>Mila Kunis</p>
-                            </td>
-                            <td>
-                                <a href="#">mila@kunis.com</a>
-                            </td>
-                            <td>
-                                <p>+91-8245787848</p>
-                            </td>
-                            <td>
-                                <p>Hero@gmail.com</p>
+                                <p>{{ lead.sales_representative }}</p>
                             </td>
                             <td>
                                 <div class="btn-group">
-                                  <button type="button" class="btn btn-outline-dark dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Mark Lead
-                                  </button>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">New Lead</a>
-                                    <a class="dropdown-item" href="#">Hot Lead</a>
-                                    <a class="dropdown-item" href="#">Mark Down</a>
-                                  </div>
-                                </div>
-                            </td>
-                            <td>
-                                <!-- Button trigger modal -->
-<button type="button" class="btn btn-grey" data-toggle="modal" data-target="#exampleModalCenter">
-  View
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Add Remark:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit Changes</button>
-      </div>
-    </div>
-    </div>
-  </div>
-</div>
-                            </td>
-                        </tr>
-            </tr>
-                <tr style="font-size: medium">
-                            <td>
-                                <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" style="border-radius: 50%;">
-                            </td>
-                            <td>
-                                <p>Mila Kunis</p>
-                            </td>
-                            <td>
-                                <a href="#">mila@kunis.com</a>
-                            </td>
-                            <td>
-                                <p>+91-8245787848</p>
-                            </td>
-                            <td>
-                                <p>Hero@gmail.com</p>
-                            </td>
-                            <td>
-                                <div class="btn-group">
+                                    {% if lead.status == 'hot' %}
                                   <button type="button" class="btn btn-outline-danger dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Hot Lead
+                                  {% elif lead.status == 'cold' %}
+                                      <button type="button" class="btn btn-outline-warning dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      {% elif lead.status == 'med' %}
+                                          <button type="button" class="btn btn-outline-primary dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      {% else%}
+                                              <button type="button" class="btn btn-outline-success dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                    {% endif %}
+                                    {{ lead.status }} Lead
                                   </button>
                                   <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">New Lead</a>
+                                    <a class="dropdown-item" href="#">Cold Lead</a>
                                     <a class="dropdown-item" href="#">Hot Lead</a>
-                                    <a class="dropdown-item" href="#">Mark Down</a>
+                                    <a class="dropdown-item" href="#">Med Lead</a>
+                                      <a class="dropdown-item" href="#">Sold Lead</a>
                                   </div>
                                 </div>
                             </td>
@@ -252,70 +138,8 @@ border-radius: 10px;">
 </div>
                             </td>
                         </tr>
-        </tr>
-                <tr style="font-size: medium">
-                            <td>
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" style="border-radius: 50%;">
-                            </td>
-                            <td>
-                                <p>Mila Kunis</p>
-                            </td>
-                            <td>
-                                <a href="#">mila@kunis.com</a>
-                            </td>
-                            <td>
-                                <p>+91-8245787848</p>
-                            </td>
-                            <td>
-                                <p>Hero@gmail.com</p>
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                  <button type="button" class="btn btn-outline-success dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Success
-                                  </button>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">New Lead</a>
-                                    <a class="dropdown-item" href="#">Hot Lead</a>
-                                    <a class="dropdown-item" href="#">Mark Down</a>
-                                  </div>
-                                </div>
-                            </td>
-                            <td>
-                                <!-- Button trigger modal -->
-<button type="button" class="btn btn-grey" data-toggle="modal" data-target="#exampleModalCenter">
-  View
-</button>
+                {% endfor %}
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Add Remark:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit Changes</button>
-      </div>
-    </div>
-    </div>
-  </div>
-</div>
-                            </td>
-                        </tr>
-    </tr>
 
                         </tbody>
                     </table>
@@ -333,6 +157,8 @@ border-radius: 10px;">
         </div>
     </div>
 </div>
+
+
 
 <style type="text/css">
     body {
