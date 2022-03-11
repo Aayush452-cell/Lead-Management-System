@@ -23,27 +23,47 @@
                 alt=""
         />
     </a>
-    <a href="{% url 'logout' %}" style="margin-left: auto;margin-right: 10px"><button type="button" class="btn btn-outline-danger btn-lg" style="margin-left: auto;margin-right: 10px">LogOut
-    </button></a>
+
+    <a href="{% url 'logout' %}" style="margin-left: auto;margin-right: 10px">
+        <button type="button" class="btn btn-outline-danger btn-lg" style="margin-left: auto;margin-right: 10px">LogOut
+        </button>
+    </a>
 </nav>
+
+<div class="alert alert-success alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Welcome!</strong>
+</div>
 <div class="container">
     <!-- Image and text -->
-<nav class="navbar navbar-light bg-light">
-    <div style="margin-right: auto"  style="font-weight: bold;font-size: medium">
-        <img src="https://bootdey.com/img/Content/avatar/avatar7.png"  width="60" height="60" class="d-inline-block" alt=""> <strong style="font-size: medium">Good Morning {{ user.first_name }}</strong><br>Below you will find the list of assigned leads to you
-    </div>
-</nav>
+    <nav class="navbar navbar-light bg-light">
+        <div style="margin-right: auto" style="font-weight: bold;font-size: medium">
+            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" width="60" height="60" class="d-inline-block"
+                 alt=""> <strong style="font-size: medium">Good Morning {{ user.first_name }}</strong><br>Below you will
+            find the list of assigned leads to you
+        </div>
+    </nav>
     <nav class="navbar sticky" style="background: rgba(255, 255, 255, 1); border: 1px solid #EBF0F5;
 box-sizing: border-box;
 border-radius: 10px;
 ">
         <p style="font-size: medium">Filter Leads By Status</p>
         <div style="margin-left: auto;">
-            <a href="{% url 'filtering' pk='cold' %}"><button type="button" class="btn btn-outline-dark btn-lg">New Lead</button></a>
-            <a href="{% url 'filtering' pk='hot' %}"><button type="button" class="btn btn-outline-dark btn-lg">Hot Lead</button></a>
-            <a href="{% url 'filtering' pk='cold' %}"><button type="button" class="btn btn-outline-dark btn-lg">Cold Lead</button></a>
-            <a href="{% url 'filtering' pk='med' %}"><button type="button" class="btn btn-outline-dark btn-lg">Med Lead</button></a>
-            <a href="{% url 'filtering' pk='sold' %}"><button type="button" class="btn btn-outline-dark btn-lg">Success</button></a>
+            <a href="{% url 'filtering' pk='cold' %}">
+                <button type="button" class="btn btn-outline-dark btn-lg">New Lead</button>
+            </a>
+            <a href="{% url 'filtering' pk='hot' %}">
+                <button type="button" class="btn btn-outline-dark btn-lg">Hot Lead</button>
+            </a>
+            <a href="{% url 'filtering' pk='cold' %}">
+                <button type="button" class="btn btn-outline-dark btn-lg">Cold Lead</button>
+            </a>
+            <a href="{% url 'filtering' pk='med' %}">
+                <button type="button" class="btn btn-outline-dark btn-lg">Med Lead</button>
+            </a>
+            <a href="{% url 'filtering' pk='sold' %}">
+                <button type="button" class="btn btn-outline-dark btn-lg">Success</button>
+            </a>
         </div>
     </nav>
     <div class="row" style="border: 1px solid #EBF0F5;
@@ -66,98 +86,112 @@ border-radius: 10px;">
                         </thead>
                         <tbody>
                         {% for lead in leads %}
-                        <tr style="font-size: medium">
-                            <td>
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" style="border-radius: 50%;">
-                            </td>
-                            <td>
-                                <p>{{ lead.name }}</p>
-                            </td>
-                            <td>
-                                <a href="#">{{ lead.email }}</a>
-                            </td>
-                            <td>
-                                <p>{{ lead.phone_no }}</p>
-                            </td>
-                            <td>
-                                <p>{{ lead.sales_representative }}</p>
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                    {% if lead.status == 'hot' %}
-                                  <button type="button" class="btn btn-outline-danger dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  {% elif lead.status == 'cold' %}
-                                      <button type="button" class="btn btn-outline-warning dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      {% elif lead.status == 'med' %}
-                                          <button type="button" class="btn btn-outline-primary dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      {% else%}
-                                              <button type="button" class="btn btn-outline-success dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <tr style="font-size: medium">
+                                <td>
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""
+                                         style="border-radius: 50%;">
+                                </td>
+                                <td>
+                                    <p>{{ lead.name }}</p>
+                                </td>
+                                <td>
+                                    <a href="#">{{ lead.email }}</a>
+                                </td>
+                                <td>
+                                    <p>{{ lead.phone_no }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ lead.sales_representative }}</p>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        {% if lead.status == 'hot' %}
+                                            <button type="button" class="btn btn-outline-danger dropdown-toggle btn-lg"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {% elif lead.status == 'cold' %}
+                                            <button type="button" class="btn btn-outline-warning dropdown-toggle btn-lg"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {% elif lead.status == 'med' %}
+                                            <button type="button" class="btn btn-outline-primary dropdown-toggle btn-lg"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {% else %}
+                                            <button type="button" class="btn btn-outline-success dropdown-toggle btn-lg"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                                    {% endif %}
-                                    {{ lead.status }} Lead
-                                  </button>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Cold Lead</a>
-                                    <a class="dropdown-item" href="#">Hot Lead</a>
-                                    <a class="dropdown-item" href="#">Med Lead</a>
-                                      <a class="dropdown-item" href="#">Sold Lead</a>
-                                  </div>
-                                </div>
+                                        {% endif %}
+                                        {{ lead.status }} Lead
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Cold Lead</a>
+                                            <a class="dropdown-item" href="#">Hot Lead</a>
+                                            <a class="dropdown-item" href="#">Med Lead</a>
+                                            <a class="dropdown-item" href="#">Sold Lead</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModalCenter{{ lead.id }}" id="add{{ lead.id }}">
+                                        +Add
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalCenter{{ lead.id }}" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document" id="document{{ lead.id }}">
+                                            <div class="modal-content" id="modal-content{{lead.id }}">
+                                                <div class="modal-header" id="modal-header{{ lead.id }}">
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle{{ lead.id }}">NOTES for {{ lead.name }}</h5>
+                                                    <button type="button" class="close" id="closing{{ lead.id }}" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="message-text" class="col-form-label" id="label{{ lead.id }}">Add
+                                                                Remark:</label>
+                                                            <textarea class="form-control"
+                                                                      id="message-text{{ lead.email }}">{{ lead.notes }}</textarea>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal" id="close{{ lead.id }}">Close
+                                                    </button>
+
+                                                    <button type="button" class="btn btn-primary" id="submit{{ lead.id }}" onclick="addnotes({{ lead.id }},document.getElementById('message-text{{ lead.email }}').value,event)">{% csrf_token %}
+                                                        Submit Changes
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
                             </td>
-                            <td>
-                                <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  +Add
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Add Remark:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit Changes</button>
-      </div>
-    </div>
-    </div>
-  </div>
-</div>
-                            </td>
-                        </tr>
-                {% endfor %}
+                            </tr>
+                        {% endfor %}
 
 
-                        </tbody>
-                    </table>
-                </div>
-                <ul class="pagination pull-right">
-                    <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
-                </ul>
+                </tbody>
+                </table>
             </div>
+            <ul class="pagination pull-right">
+                <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+            </ul>
         </div>
     </div>
 </div>
-
+</div>
 
 
 <style type="text/css">
@@ -373,8 +407,28 @@ border-radius: 10px;">
     }
 </style>
 
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
 <script type="text/javascript">
 
+    function addnotes(id,note,e) {
+        console.log(note,id)
+        console.log(e);
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url:'{% url "index" %}',
+            data:{
+                id:id,
+                notes: note,
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+            },success: function (response) {
+                    console.log("got updated")
+                    alert('Got Updated')
+                }
+        })
+    }
 </script>
 </body>
 </html>
