@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+import authentication.urls, authentication.views
 
-import authentication.urls
+handler404 = 'authentication.views.handler404'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include(authentication.urls.urlpatterns))
+    path('',include(authentication.urls.urlpatterns)),
 ]
