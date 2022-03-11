@@ -3,7 +3,20 @@ from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser,Leads
 from django.http import HttpResponse
 
-
+def index(request):
+    if request.user.is_authenticated and request.method == 'POST':
+        leads = Leads.objects.all()
+        id = request.POST['id']
+        notes = request.POST['notes']
+        lead = Leads.objects.get(id=id)
+        lead.notes = notes
+        lead.save()
+        return render(request, 'User_list_page.html', {'leads': leads})
+    elif request.user.is_authenticated:
+        leads = Leads.objects.all()
+        return render(request, 'User_list_page.html', {'leads': leads})
+    else:
+        return HttpResponse("You are not Authorized to visit this page!!!")
 
 def user_login(request):
     if request.user.is_authenticated:

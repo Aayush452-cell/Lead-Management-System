@@ -43,6 +43,7 @@ class Leads(models.Model):
         max_length=32,
         choices=STATUS
     )
+    notes = models.TextField(default="Enter the note")
     sales_representative = models.ForeignKey(CustomUser, on_delete=models.CASCADE, limit_choices_to={'is_staff': False})
 
     def __str__(self):
