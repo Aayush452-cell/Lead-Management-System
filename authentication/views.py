@@ -3,6 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from .models import CustomUser,Leads
 from django.http import HttpResponse
 
+def handler404(request,exception=None):
+    return render(request, '404.html',status=404)
+
 def index(request):
     if request.user.is_authenticated and request.method == 'POST':
         leads = Leads.objects.all()
