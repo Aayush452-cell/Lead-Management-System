@@ -91,6 +91,9 @@ def analytics(request):
                                         created_at__gte=monthdelta(datetime.now(), -3)))
         nmed = len(Leads.objects.filter(status="med", sales_representative=request.user,
                                         created_at__gte=monthdelta(datetime.now(), -3)))
+        nsold = len(Leads.objects.filter(status="sold", sales_representative=request.user,
+                                        created_at__gte=monthdelta(datetime.now(), -3)))
+
         sold = Leads.objects.filter(status="sold")
         sold_dic = {}
         for solds in sold:
@@ -102,8 +105,9 @@ def analytics(request):
         sold_dic = sorted(sold_dic.items(), key=lambda x: x[1], reverse=True)[
                    :10]  # Sorted in descending order according to values
 
-        print(ncold, nhot, nmed, sold_dic)
-        string = str(ncold) + " " + str(nhot) + " " + str(nmed)
-        return HttpResponse(string)
+        n = ncold + nmed + nhot + nsold
+        params = {'n': n, 'ncold': ncold, 'nhot': nhot, 'nmed': nmed, 'sold_dic': sold_dic}
+        print(ncold, nhot, nmed, sold_dic, params)
+        return render(request,'analytics.html', {'params': params})
     else:
         return HttpResponse("Not authorized to view this page")
