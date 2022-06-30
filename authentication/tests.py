@@ -16,4 +16,4 @@ class ModelTesting(TestCase):
     def test_Leads_model(self):
         lead = self.lead
         self.assertTrue(isinstance(lead, Leads))
-        self.assertEqual(str(lead), 'leads@gmail.com')
+        self.assertEqual(str(lead), 'lead@gmail.com')
